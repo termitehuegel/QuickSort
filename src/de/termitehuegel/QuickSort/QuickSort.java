@@ -2,6 +2,7 @@ package de.termitehuegel.QuickSort;
 
 /**
  * @author termitehuegel
+ * @param <T> the Datatype of the elements that will be sorted
  */
 public class QuickSort<T extends Comparable<T>> {
 
