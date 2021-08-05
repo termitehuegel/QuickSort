@@ -1,30 +1,78 @@
 package de.termitehuegel.QuickSort;
 
+
 /**
  * @author termitehuegel
  * @param <T> the Datatype of the elements that will be sorted
  */
-public class QuickSort<T extends Comparable<T>> {
+public class QuickSort<T extends Comparable<T>> extends Thread{
 
-    public void quickSort(T[] array) {
-        quickSort(array, 0, array.length-1);
+    /**
+     * reference to the array that will be sorted
+     */
+    private final T[] array;
+    /**
+     * begin index of the part that will be sorted
+     */
+    private final int begin;
+    /**
+     * end index of the part that will be sorted
+     */
+    private final int end;
+
+    /**
+     * @param array to sort
+     * @param begin index of the part that will be sorted
+     * @param end index of the part that will be sorted
+     */
+    public QuickSort(T[] array, int begin, int end) {
+        this.array = array;
+        this.begin = begin;
+        this.end = end;
     }
+
+    /**
+     * @param array to sort
+     */
+    public QuickSort(T[] array) {
+        this.array = array;
+        this.begin = 0;
+        this.end = array.length-1;
+    }
+
+
+    @Override
+    public void run() {
+        try {
+            quickSort(array, begin, end);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        super.run();
+    }
+
+
     /**
      * Sorts an array
      * @param array that will be sorted
      * @param begin index of the part that will be sorted
      * @param end index of the part that will be sorted
      */
-    public void quickSort(T[] array ,int begin, int end) {
+    public void quickSort(T[] array ,int begin, int end) throws InterruptedException {
         //finished if less than 2 Elements need to be sorted (-> 1 or 0)
         if (begin < end) {
             //get position of a pivot and sort the rest left if it's lower and right if it's bigger
             int pivotIndex = findPivot(array, begin, end);
 
             //Sort everything lower than the last Pivot
-            quickSort(array, begin, pivotIndex-1);
+            QuickSort<T> low = new QuickSort<>(array, begin, pivotIndex-1);
+            low.start();
             //Sort everything bigger than the last Pivot
-            quickSort(array, pivotIndex+1, end);
+            QuickSort<T> high = new QuickSort<>(array, pivotIndex+1, end);
+            high.start();
+            //waits for the sub threads to finish
+            low.join();
+            high.join();
         }
     }
 
