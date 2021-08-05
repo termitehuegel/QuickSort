@@ -7,21 +7,39 @@ package de.termitehuegel.QuickSort;
  */
 public class QuickSort<T extends Comparable<T>> extends Thread{
 
+    /**
+     * reference to the array that will be sorted
+     */
     private final T[] array;
+    /**
+     * begin index of the part that will be sorted
+     */
     private final int begin;
+    /**
+     * end index of the part that will be sorted
+     */
     private final int end;
 
+    /**
+     * @param array to sort
+     * @param begin index of the part that will be sorted
+     * @param end index of the part that will be sorted
+     */
     public QuickSort(T[] array, int begin, int end) {
         this.array = array;
         this.begin = begin;
         this.end = end;
     }
 
+    /**
+     * @param array to sort
+     */
     public QuickSort(T[] array) {
         this.array = array;
         this.begin = 0;
         this.end = array.length-1;
     }
+
 
     @Override
     public void run() {
