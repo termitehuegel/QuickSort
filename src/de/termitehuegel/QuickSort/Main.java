@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) {
 
         if (args.length != 0) {
+            //int array out of arguments
             int[] array = new int[args.length];
             for (int i = 0; i < args.length; i++) {
                 array[i] = Integer.parseInt(args[i]);
