@@ -11,8 +11,6 @@ public class Main {
             for (int i = 0; i < args.length; i++) {
                 array[i] = Integer.parseInt(args[i]);
             }
-            //Input Array => expected Ausgabe: [1, 2, 2, 2, 3, 3, 3, 4, 5, 6, 23, 234]
-            //int[] array = {3,5,6,23,234,1,2,3,4,2,3,2};
             quickSort(array, 0, array.length-1);
             System.out.println(Arrays.toString(array));
         }
