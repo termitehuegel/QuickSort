@@ -31,18 +31,20 @@ public class QuickSort<T extends Comparable<T>> {
                 lastLowerThanPivot++;
 
                 //Swap The element on counter with the element on lastLowerThanPivot
-                T swapTemp = array[lastLowerThanPivot];
-                array[lastLowerThanPivot] = array[counter];
-                array[counter] = swapTemp;
+                swap(array, lastLowerThanPivot, counter);
             }
         }
 
         //swap the pivot (last Item) with the item after the lastLowerThanPivot Element
-        T swapTemp = array[lastLowerThanPivot+1];
-        array[lastLowerThanPivot+1] = array[end];
-        array[end] = swapTemp;
+        swap(array, lastLowerThanPivot+1, end);
 
         //return the index of the Pivot
         return lastLowerThanPivot+1;
+    }
+
+    private void swap(T[] array, int e1, int e2) {
+        T temp = array[e1];
+        array[e1] = array[e2];
+        array[e2] = temp;
     }
 }
